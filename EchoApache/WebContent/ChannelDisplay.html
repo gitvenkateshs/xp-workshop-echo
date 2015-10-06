@@ -1,26 +1,49 @@
+
+  
+Tuesday, October 06, 2015 
+Ramya Sivanesan (ramsivan - ENGINEER.SOFTWARE ENGINEERING)  
+  File transfer not successful. You do not have permission to save files on this computer 
+ 
+
+ 
+ 4:02 PM 
 <!DOCTYPE html>
 <html>
 <head>
 <script>
 function sendChannelNumber() {
-	var n = document.getElementById("no").value;
-console.log(n);
-	
+var n = document.getElementById("no").value;
+    console.log(n);
+    channelChange(n);
+
 }
+
+function channelChange(n){
+var channels = JSON.parse("channels");
+var channelURL = channels.id+"_Video.mp4";
+var video = document.getElementById('vid');
+video.src=channelURL;
+video.load();
+}
+
 </script>
+<!-- script type="text/javascript" src="channelChange.js"---->
 </head>
 <body>
 <div>
-<video width ="100%" height ="100%" controls autoplay>
+<video id="vid" width ="100%" height ="100%"  autoplay>
 <source  src="http://r3---sn-aigllnzy.googlevideo.com/videoplayback?key=yt6&initcwndbps=6660000&expire=1444132705&lmt=1427902771599657&sparams=dur%2Cid%2Cinitcwndbps%2Cip%2Cipbits%2Citag%2Clmt%2Cmime%2Cmm%2Cmn%2Cms%2Cmv%2Cnh%2Cpl%2Cratebypass%2Csource%2Cupn%2Cexpire&mm=31&source=youtube&mn=sn-aigllnzy&ratebypass=yes&ip=2a02%3A2498%3Ae003%3A46%3A3%3A43%3A0%3A2&id=o-AFuXRDzCqqj7H4kvsKe9dqUGffIvzMHyQzjhrsqQlToK&ms=au&mt=1444111059&pl=33&mv=m&dur=313.446&mime=video%2Fmp4&itag=18&upn=wxphZykhsmA&nh=IgpwcjAyLmxocjE0KgkxMjcuMC4wLjE&ipbits=0&sver=3&signature=383DC388F0EB002349387213DC009169B3AE4DD0.87FC4BA7001149BCBF49153F47E9D637CEEEA360&fexp=9408710%2C9409069%2C9412914%2C9414764%2C9415365%2C9415436%2C9415485%2C9415515%2C9416023%2C9416126%2C9416729%2C9417707%2C9418063%2C9418153%2C9418401%2C9418448%2C9419241%2C9420230%2C9420348%2C9421013%2C9421168%2C9421411%2C9421707%2C9421945&title=PEOPLE+ARE+AWESOME%21+2015+%28IMPOSSIBLE%29 " type="video/mp4">
 </video>
 </div>
 <div>
-<input type="radio" name="Enter the Channel Number" onchange="document.getElementById("no").disabled=false"/> Enter Channel Number
-  <form>
+<input type="radio" name="Enter the Channel Number" /> Enter Channel Number
+<span><input type="radio" name="Enter the Channel Number" disabled/> Enter Channel Name</span> 
+  <form action="ChannelSwitching" method="get">
   <span><input type="number" name="ChannelNo" id="no"  ></span>
   <span><input type="submit" value="Okay" onclick= "sendChannelNumber()"></span>
-</form>
-</div>
-</body>
-</html>
+  <span>
+  <table width=100% height=100%>
+<td style="text-align: center; vertical-align: middle;">
+</td>
+</table> 4:03 PM 
+
