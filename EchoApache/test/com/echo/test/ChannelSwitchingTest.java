@@ -2,6 +2,11 @@ package com.echo.test;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
+import javax.servlet.ServletException;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.MockitoAnnotations;
@@ -25,12 +30,25 @@ public class ChannelSwitchingTest {
 	@Test
 	public void getChannel_should_return_channel_number_for_valid_input() {
 		
-		//request.addParameter();
+		request.addParameter("ChannelNo","3");
 		//assertEquals("Pogo", chSw.getChannel("3"));
 		//assertEquals("Pogo", chSw.doGet(request,response));
-		 //chSw.doPost(request, response);
+		 try {
+			chSw.doPost(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
-	        assertEquals("text/html", response.getContentType());
+	        try {
+				assertEquals("Pogo", response.getContentAsString());
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();                    
+			}
 
 	}
 	//@Test
