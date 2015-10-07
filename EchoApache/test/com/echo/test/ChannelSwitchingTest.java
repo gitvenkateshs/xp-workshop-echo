@@ -33,22 +33,17 @@ public class ChannelSwitchingTest {
 	public static void setUpBeforeClass() throws Exception {
 		chSw=new ChannelSwitching();
 		MockitoAnnotations.initMocks(chSw);
+	
 	}
 
 	@Test
 	public void getChannel_should_return_channel_number_for_valid_input() {
 		
-		  try {
-			chSw.doGet(request, response);
-		} catch (ServletException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		 
 
-		assertEquals("Pogo", chSw.getChannel("3"));
+		//assertEquals("Pogo", chSw.getChannel("3"));
+		assertEquals("Pogo", chSw.doGet(request,response));
+
 	}
 	//@Test
 	public void getChannel_should_return_no_channel_for_invalid_input() {
