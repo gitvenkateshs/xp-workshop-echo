@@ -17,10 +17,11 @@ function authUser() {
 			 	console.log(hi);
 			 	if(hi=="true"){
 			 		document.getElementById('power').disabled= false;
-			 		alert("User Authenticated : Click power button to log in");
+			 				alert("User Authenticated : Click power button to log in");
 			 	}
 			 	else if(hi=="false"){
 			 		alert("Unauthorized User");
+			 		document.getElementById('user_name').value = "";
 			 	}
 			 		
 			 }
