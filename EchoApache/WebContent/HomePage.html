@@ -5,7 +5,7 @@
 <script>
 function authUser() {	
 	
-		var name = document.getElementById('user_name');	
+		var name = document.getElementById('user_name').value;	
 	    $.ajax({
 			 url: 'UserAuth',
 			 data: "username="+name,
