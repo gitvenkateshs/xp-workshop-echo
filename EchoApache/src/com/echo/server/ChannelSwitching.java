@@ -3,7 +3,6 @@ package com.echo.server;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Properties;
 
@@ -23,7 +22,6 @@ public class ChannelSwitching extends HttpServlet {
      */
     public ChannelSwitching() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -33,32 +31,49 @@ public class ChannelSwitching extends HttpServlet {
 		// TODO Auto-generated method stub
 		String channelNumber = request.getParameter("ChannelNo");
 		System.out.println(channelNumber);
-		String json = getChannelNumber(channelNumber);
-		System.out.println(json);
 		PrintWriter out = response.getWriter();
-		//out.write(json);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		String json = getChannel(channelNumber);
+		if(json!=null){
+			System.out.println(json);
+		}
+		else {
+			System.out.println("No channel found");
+			out.write("No channel found");
+			return ;
+		}
+		out.write(json);
 	}
 
-	private String getChannelNumber(String channelNumber) {
-		Properties prop = new Properties();
-		InputStream input = null;
+	private String getChannel(String channelNumber) {
+		File input = new File(getServletContext().getRealPath("/")+"CONFIG"+File.separator+"pmt.properties");
+		Properties pmt = new Properties();
 		try {
-			System.out.println(File.separator+"CONFIG"+File.separator+"channel.properties");
-			input = new FileInputStream(File.separator+"CONFIG"+File.separator+"channel.properties");
-			prop.load(input);
-			System.out.println(prop.getProperty(channelNumber.toString()));
+			FileInputStream inputStream = new FileInputStream(input);
+			pmt.load(inputStream);
+			return getChannelName(pmt.getProperty(channelNumber));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return prop.getProperty(channelNumber.toString());
+		return null;
+	}
+
+	private String getChannelName(String property) {
+		File input = new File(getServletContext().getRealPath("/")+"CONFIG"+File.separator+"pmtToservice.properties");
+		Properties pmtToservice = new Properties();
+		try {
+			FileInputStream inputStream = new FileInputStream(input);
+			pmtToservice.load(inputStream);
+			return pmtToservice.getProperty(property);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
