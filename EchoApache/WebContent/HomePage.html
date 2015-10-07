@@ -1,11 +1,46 @@
 <!DOCTYPE html>
 <html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+function authUser() {	
+	
+		var name = document.getElementById('user_name');	
+	    $.ajax({
+			 url: 'UserAuth',
+			 data: "username="+name,
+			 cache: false,
+			 processData: false,
+			 type: 'POST',
+			 success: function(user_data){  
+			 	var hi=user_data;		 	
+			 	console.log(hi);
+			 	if(hello!= false ){
+			 		document.getElementById('power').disabled= false;
+			 		alert("User Authenticated : Click power button to log in");
+			 	}
+			 	else {
+			 		alert("Unauthorized User");
+			 	}
+			 		
+			 }
+		});
+	}
+}
+
+</script>
+</head>
 <body bgcolor="black">
 <title>TV</title>
 <table width=100% height=100%>
 <td style="text-align: center; vertical-align: middle;">
-<input type="image" src="images/power.png"  width="200" height="200" onclick="location.href ='ChannelDisplay.html' ">
+<input type="image" src="images/power.png"  width="200" height="200" disabled id="power" onclick="location.href ='ChannelDisplay.html' ">
 </td>
 </table>
+<div  style="text-align: center; vertical-align: middle;"> 
+<span><input type="text" name="username" id="user_name" ></span>
+<span><input type="image" src="images\ok.png"  width ="40" height ="40" onclick= "authUser()"></span>
+
+</div>
 </body>
 </html>
