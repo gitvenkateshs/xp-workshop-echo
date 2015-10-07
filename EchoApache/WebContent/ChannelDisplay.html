@@ -3,9 +3,8 @@
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 <script>
-function sendChannelNumber() {
-var n = document.getElementById("no").value;
-    console.log(n);
+function sendChannelNumber(n) {
+	
     $.ajax({
 		 url: 'ChannelSwitching',
 		 data: "ChannelNo="+n,
@@ -13,31 +12,92 @@ var n = document.getElementById("no").value;
 		 processData: false,
 		 type: 'POST',
 		 success: function(data){  
-		 	var hello=data;
+		 	var hello=data;		 	
 		 	console.log(hello);
-		 	if(hello!="No channel found")
-		 		channelChange(n);
+		 	if(hello!="-1"){
+		 		document.getElementById('chno').value = n;
+		 		channelChange(hello);
+		 	}
+		 	else {
+		 		alert("Channel Unavailable");
+		 	}
+		 		
 		 }
 	});
 }
 
-function channelChange(n){
+function channelChange(hello){
 //var channels = JSON.parse("channels");
-var channelURL = n+"_Video.mp4";
-//var video = document.getElementById('vid');
+var channelURL = hello+"_Video.mp4";
+var video = document.getElementById('vid');
 //video.src=channelURL;
 //video.load();
+}
+
+function enable() {
+	document.getElementById('no').disabled = false;	
+}
+
+function incChannelNumber() {
+	var a = document.getElementById('chno').value +1; 
+	sendChannelNumber(a);
+	console.log(a);
+}
+
+function decChannelNumber() {
+	var b =document.getElementById('chno').value -1; 
+	sendChannelNumber(b);
+	console.log(b);
+}
+
+function manChannelChange() {
+	document.getElementById('r').checked = false;
+	var c = document.getElementById("no").value;
+	sendChannelNumber(c);
+	    console.log(c);
+	
 }
 </script>
 </head>
 <body>
-<input type="radio" name="Enter the Channel Number" /> Enter Channel Number
-<span><input type="radio" name="Enter the Channel Number" disabled/> Enter Channel Name</span> 
+<div id="chno"></div>
+<script type="text/javascript">
+function default_channel()
+{
+	document.getElementById('chno').value=999;
+	document.write(document.getElementById('chno').value);
+}
+default_channel();
+</script>
+<div>
+<video id="vid" width ="100%" height ="100%"  autoplay>
+<source  src="videos\default.mp4" type="video/mp4">
+</video>
+</div>
+<div>
+<input type="radio" name="Enter the Channel Number" onchange="enable()" id ="r"/> Enter Channel Number
+<span><input type="radio" name="Enter_the_Channel_Name" disabled/> Enter Channel Name</span> 
 <form>
-	<span><input type="number" name="ChannelNo" id="no"></span>
-	<span><input type="button" value="Okay" onclick= "sendChannelNumber()"></span>
+<span><input type="number" name="ChannelNo" id="no"  disabled></span>
+  <span><input type="image" src="images\ok.png"  width ="40" height ="40" onclick= "manChannelChange()"></span>
+  <span>
+  <table width=100% height=100%>
+<td style="text-align: center; vertical-align: middle;">
+</td>
+</table>
+  </span>
 </form>
+<span>
+<input type="image" src="images\up.png"  width ="40" height ="40" onclick="incChannelNumber()">
+</span>
+<span>
+<input type="image" src="images\down.png"  width ="40" height ="40" onclick= "decChannelNumber()">
+</span>
+<table width=100% height=100%>
+<td style="text-align: center; vertical-align: middle;">
+<input type="image" src="images\power.png"  width="50" height="50" onclick="location.href ='HomePage.html'">
+</td>
+</table>
+</div>
 </body>
 </html>
-  
-
