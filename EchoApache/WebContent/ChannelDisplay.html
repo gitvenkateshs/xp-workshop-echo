@@ -28,10 +28,6 @@ function sendChannelNumber(n) {
 	});
 }
 
-function enable() {
-	document.getElementById('no').disabled = false;	
-}
-
 function incChannelNumber() {
 	var a = document.getElementById('chno').innerHTML*1+1; 
 	document.getElementById('chno').innerHTML = a;
@@ -48,7 +44,6 @@ function decChannelNumber() {
 }
 
 function manChannelChange() {
-	document.getElementById('r').checked = false;
 	var c = document.getElementById("no").value;
 	document.getElementById('chno').innerHTML = c;
 	console.log(c);
@@ -61,19 +56,18 @@ function manChannelChange() {
 <script type="text/javascript">
 function default_channel()
 {
-	document.getElementById('chno').innerHTML = 0;
+	document.getElementById('chno').innerHTML = 1;
 }
 default_channel();
 </script>
 <div>
 <video id="vid" width ="100%" height ="100%"  autoplay>
-<source  src="videos\default.mp4" type="video/mp4">
+<source  src="videos\101_Video.mp4" type="video/mp4">
 </video>
 </div>
 <div>
-<input type="radio" name="Enter the Channel Number" onchange="enable()" id ="r"/> Enter Channel Number
-<span><input type="radio" name="Enter_the_Channel_Name" disabled/> Enter Channel Name</span> 
-<span><input type="number" name="ChannelNo" id="no"  disabled></span>
+Enter Channel Number/Name
+<span><input type="text" name="ChannelNo" id="no" ></span>
   <span><input type="image" src="images\ok.png"  width ="40" height ="40" onclick= "manChannelChange()"></span>
   <span>
   <table width=100% height=100%>
