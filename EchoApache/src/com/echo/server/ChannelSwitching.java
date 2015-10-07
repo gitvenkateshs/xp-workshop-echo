@@ -27,7 +27,7 @@ public class ChannelSwitching extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String channelNumber = request.getParameter("ChannelNo");
 		System.out.println(channelNumber);
@@ -39,18 +39,19 @@ public class ChannelSwitching extends HttpServlet {
 		}
 		else {
 			System.out.println("No channel found");
-			out.write("No channel found");
+			out.write("-1");
 			return ;
 		}
 	}
 
-	private String getChannel(String channelNumber) {
+	public String getChannel(String channelNumber) {
 		File input = new File(getServletContext().getRealPath("/")+"CONFIG"+File.separator+"pmt.properties");
 		Properties pmt = new Properties();
 		try {
 			FileInputStream inputStream = new FileInputStream(input);
 			pmt.load(inputStream);
-			return getChannelName(pmt.getProperty(channelNumber));
+			//return getChannelName(pmt.getProperty(channelNumber));
+			return pmt.getProperty(channelNumber);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,7 +74,7 @@ public class ChannelSwitching extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doGet(request, response);
 	}
 
