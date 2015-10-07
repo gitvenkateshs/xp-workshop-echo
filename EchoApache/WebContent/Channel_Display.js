@@ -2,6 +2,33 @@
  * 
  */
 
+window.onload = function () {
+var today = new Date();
+h = today.getHours();
+m = today.getMinutes();
+s = today.getSeconds();
+var diff = timeDiff(h,m,s);
+m = checkTime(m);
+s = checkTime(s);
+}
+
+function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+}
+
+function timeDiff() {
+var today = new Date();
+    var H = today.getHours();
+    var M = today.getMinutes();
+    var S = today.getSeconds();
+    M = checkTime(M);
+    S = checkTime(S);
+var diff = (H - h)*3600 + (M - m)*60 + (S - s);
+
+return diff;
+}
+
 function sendChannelNumber(n) {
 	
     $.ajax({
@@ -18,6 +45,8 @@ function sendChannelNumber(n) {
 		 		document.getElementById('vid').src = channelURL;
 		 		console.log(channelURL);
 		 		document.getElementById('vid').load();
+		 		document.getElementById('vid').currentTime = document.getElementById('vid').currentTime + timeDiff();
+		 		document.getElementById('vid').play();
 		 	}
 		 	else {
 		 		alert("Channel Unavailable");
