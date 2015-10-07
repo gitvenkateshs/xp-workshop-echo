@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.echo.channel.ChannelManager;
+
 /**
  * Servlet implementation class ChannelSwitching
  */
@@ -31,10 +33,10 @@ public class ChannelSwitching extends HttpServlet {
 		String channelNumber = request.getParameter("ChannelNo");
 		System.out.println(channelNumber);
 		PrintWriter out = response.getWriter();
-		String channelid = getChannel(channelNumber);
-		String channelName = getChannelName(channelid);
+		ChannelManager channelManager = new ChannelManager();
+		String channelid = channelManager.getChannelId(channelNumber);
 		if(channelid!=null){
-			System.out.println(channelid + " " + channelName);
+			System.out.println(channelid);
 			out.write(channelid);
 		}
 		else {
@@ -42,33 +44,6 @@ public class ChannelSwitching extends HttpServlet {
 			out.write("-1");
 			return ;
 		}
-	}
-
-	public String getChannel(String channelNumber) {
-		File input = new File(getServletContext().getRealPath("/")+"CONFIG"+File.separator+"pmt.properties");
-		Properties pmt = new Properties();
-		try {
-			FileInputStream inputStream = new FileInputStream(input);
-			pmt.load(inputStream);
-			//return getChannelName(pmt.getProperty(channelNumber));
-			return pmt.getProperty(channelNumber);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-
-	private String getChannelName(String property) {
-		File input = new File(getServletContext().getRealPath("/")+"CONFIG"+File.separator+"pmtToservice.properties");
-		Properties pmtToservice = new Properties();
-		try {
-			FileInputStream inputStream = new FileInputStream(input);
-			pmtToservice.load(inputStream);
-			return pmtToservice.getProperty(property);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
 	}
 
 	/**
