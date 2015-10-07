@@ -35,13 +35,13 @@ public class ChannelSwitching extends HttpServlet {
 		String json = getChannel(channelNumber);
 		if(json!=null){
 			System.out.println(json);
+			out.write(json);
 		}
 		else {
 			System.out.println("No channel found");
 			out.write("No channel found");
 			return ;
 		}
-		out.write(json);
 	}
 
 	private String getChannel(String channelNumber) {
