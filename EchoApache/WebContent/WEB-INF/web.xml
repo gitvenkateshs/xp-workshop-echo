@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
   <display-name>EchoApache</display-name>
   <welcome-file-list>
-  	<welcome-file>EchoApache</welcome-file>
+    <welcome-file>EchoApache</welcome-file>
     <welcome-file>HomePage.html</welcome-file>
   </welcome-file-list>
   <servlet>
@@ -12,5 +12,15 @@
   <servlet-mapping>
     <servlet-name>ChannelSwitching</servlet-name>
     <url-pattern>/ChannelSwitching</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>UserAuth</display-name>
+    <servlet-name>UserAuth</servlet-name>
+    <servlet-class>com.echo.server.UserAuth</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserAuth</servlet-name>
+    <url-pattern>/UserAuth</url-pattern>
   </servlet-mapping>
 </web-app>

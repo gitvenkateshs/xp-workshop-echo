@@ -28,14 +28,14 @@ public class ChannelSwitching extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		String channelNumber = request.getParameter("ChannelNo");
 		System.out.println(channelNumber);
 		PrintWriter out = response.getWriter();
-		String json = getChannel(channelNumber);
-		if(json!=null){
-			System.out.println(json);
-			out.write(json);
+		String channelid = getChannel(channelNumber);
+		String channelName = getChannelName(channelid);
+		if(channelid!=null){
+			System.out.println(channelid + " " + channelName);
+			out.write(channelid);
 		}
 		else {
 			System.out.println("No channel found");
